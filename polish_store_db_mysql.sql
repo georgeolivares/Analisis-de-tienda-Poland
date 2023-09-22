@@ -1,15 +1,22 @@
 -- USE DATABASE
 USE polish_store;
+GO
 
+-- IMPORTED DAILY SALES USING IMPORT WIZARD
+GO
+
+-- CHANGE TABLE NAME
+EXEC sp_rename 'newDaySellFile', 'daily_sales';
+GO
 
 -- VERIFY DATA IS CORRECT
-SELECT * FROM daily_sales;
-
+SELECT * FROM newDaySellFile;
+GO
 
 -- UPLOADED MONTHLY SALES FILE FROM DBEAVER
 ALTER TABLE polish_store.newmonthlysalesbyproduct
 RENAME TO polish_store.monthly_sales_by_product;
-
+GO
 
 -- VERIFY THAT ALL RECORDS WERE UPLOADED TO THE TABLE
 SELECT COUNT(*) AS 'RecordCount' FROM polish_store.monthly_sales_by_product;
@@ -81,7 +88,3 @@ ADD FOREIGN KEY(Product_Id_Num) REFERENCES products(Product_Id_Num);
 
 -- CONFIRM FOREIGN KEY WAS SET
 DESCRIBE polish_store.monthly_sales_by_product;
-
-
-
-
