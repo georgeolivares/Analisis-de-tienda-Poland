@@ -87,7 +87,16 @@ FROM information_schema.COLUMNS
 WHERE table_name = 'products';
 
 
+SELECT * FROM monthly_sales WHERE month = 'January';
 
+SELECT DISTINCT(month) FROM monthly_sales;
 
+SELECT month, COUNT(*)
+FROM monthly_sales
+GROUP BY month;
+
+SELECT column_name 
+FROM information_schema.columns 
+WHERE table_name = 'monthly_sales' AND table_schema = 'public'; 
 
 
